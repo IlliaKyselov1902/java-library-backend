@@ -43,10 +43,11 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
      http.authorizeHttpRequests(req -> req
-            .requestMatchers(antMatcher("/h2/**")).permitAll() //works only for testing
-
-                .requestMatchers(antMatcher("/error")).permitAll()
-                .anyRequest().authenticated());
+            .requestMatchers(antMatcher("/h2/**")).permitAll()
+            .requestMatchers(antMatcher("/auth/registration")).permitAll()
+            .requestMatchers(antMatcher("/auth/login")).permitAll()
+            .requestMatchers(antMatcher("/error")).permitAll()
+            .anyRequest().authenticated());
 
     //HTTP session state management
         http.sessionManagement().sessionCreationPolicy(STATELESS);
