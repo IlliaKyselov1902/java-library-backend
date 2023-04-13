@@ -6,11 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-public class UserDetailsService implements UserDetails {
+public class UserDetailsServiceImpl implements UserDetails {
     private String username;
     private String password;
 
-    public UserDetailsService(String username, String password) {
+    public UserDetailsServiceImpl(String username, String password) {
         this.username = username;
         this.password = password;
     }
