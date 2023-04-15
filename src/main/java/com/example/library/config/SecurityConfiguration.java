@@ -7,6 +7,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,8 +45,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
      http.authorizeHttpRequests(req -> req
             .requestMatchers(antMatcher("/h2/**")).permitAll()
-            .requestMatchers(antMatcher("/auth/registration")).permitAll()
-            .requestMatchers(antMatcher("/auth/login")).permitAll()
+            .requestMatchers(HttpMethod.POST, "/auth/registration").permitAll()
+            .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
             .requestMatchers(antMatcher("/error")).permitAll()
             .anyRequest().authenticated());
 
