@@ -12,37 +12,46 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/books")
 public class BookController {
     BookService bookService;
     //Rewrite with pagination
-    @GetMapping("/get")
+    @GetMapping("/books")
     @ResponseStatus(HttpStatus.FOUND)
     List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("/get/{book-id}")
+    @GetMapping("/books/{book-id}")
     @ResponseStatus(HttpStatus.FOUND)
-    Book getBookById(@PathVariable("book-id") long bookId) {
+    Book getBookById(@PathVariable("book-id") Long bookId) {
         return bookService.getBookById(bookId);
     }
 
-    @PostMapping("/add")
+    @GetMapping("/books/author/{author-id}")
+    @ResponseStatus(HttpStatus.OK)
+    List<Book> getBooksByAuthor(@PathVariable("author-id") Long authorId) {
+        return bookService.getBooksByAuthor(authorId);
+    }
+
+    @PostMapping("/author/{author-id}/add")
     @ResponseStatus(HttpStatus.CREATED)
-    Book addBook(BookCreationRequest request) {
+    Book addBook(@PathVariable("author-id") Long authorId,
+                 BookCreationRequest request) {
         return bookService.addBook(request);
     }
 
-    @PatchMapping("/edit/{book-id}")
+    @PatchMapping("/edit/{author-id}/{book-id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    SuccessEditResponse editBook(@PathVariable("book-id") long bookId, @RequestBody BookCreationRequest request) {
+    SuccessEditResponse editBook(@PathVariable("author-id") Long authorId,
+                                 @PathVariable("book-id") Long bookId,
+                                 @RequestBody BookCreationRequest request) {
         return bookService.editBook(bookId, request);
     }
 
-    @DeleteMapping("/delete/{book-id}")
+    @DeleteMapping("/author/{author-id}/books/{book-id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    SuccessEditResponse deleteBook(@PathVariable("book-id") Long bookId) {
+    SuccessEditResponse editBook(@PathVariable("author-id") Long authorId,
+                                 @PathVariable("book-id") Long bookId) {
         return bookService.deleteBook(bookId);
     }
 }

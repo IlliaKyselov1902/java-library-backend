@@ -17,9 +17,15 @@ import java.util.List;
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
     BookRepository bookRepository;
+
     @Override
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public List<Book> getBooksByAuthor(Long authorId) {
+        return null;
     }
 
     @Override
@@ -33,12 +39,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public SuccessEditResponse editBook(long id, BookCreationRequest request) {
+    public SuccessEditResponse editBook(Long bookId, BookCreationRequest request) {
         return null;
     }
 
     @Override
     public SuccessEditResponse deleteBook(Long bookId) {
+
         if (!bookRepository.existsById(bookId)) {
             throw new BookNotFoundException();
         }
