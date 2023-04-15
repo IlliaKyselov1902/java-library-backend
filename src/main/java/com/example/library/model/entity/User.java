@@ -1,14 +1,13 @@
 package com.example.library.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+
 //Maybe add the birthdate
 @Entity
+@Table(name = "tbl_user")
 @Getter
 @Setter
 @Builder
