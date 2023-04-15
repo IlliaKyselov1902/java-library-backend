@@ -2,6 +2,7 @@ package com.example.library.authentication;
 
 import com.example.library.model.dto.AuthenticationDTO;
 import com.example.library.model.request.UserRegistrationRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -13,13 +14,13 @@ public class AuthenticationController {
     AuthenticationService authService;
     @PostMapping("/auth/registration")
     @ResponseStatus(HttpStatus.OK)
-    public AuthenticationDTO registration(@RequestBody UserRegistrationRequest request) {
+    public AuthenticationDTO registration(@Valid @RequestBody UserRegistrationRequest request) {
         return authService.register(request);
     }
 
     @PostMapping("/auth/login")
     @ResponseStatus(HttpStatus.OK)
-    public AuthenticationDTO login(Authentication authentication) {
+    public AuthenticationDTO login(@Valid Authentication authentication) {
         return authService.login(authentication.getName());
     }
 
